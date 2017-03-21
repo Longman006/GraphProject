@@ -16,3 +16,34 @@ int calculateEnergyFromNeighbours(Node* node, int n_edges)
 
     return -sum;
 }
+
+int calculateContributionDifference(Node* node, int n_edges)
+{
+    int energy = 0, flippedEnergy = 0;
+
+    energy = _calculateContribution(node, n_edges);
+    flipSpin(node);
+    flippedEnergy = _calculateContribution(node, n_edges);
+    flipSpin(node);
+
+    return flippedEnergy - energy;
+}
+
+int _calculateContribution(Node* node, int n_edges)
+{
+    int energy = calculateEnergyFromNeighbours(node, n_edges);
+    for(int i=0; i<n_edges; i++)
+        energy += calculateEnergyFromNeighbours(node->edges[i], n_edges);
+
+    return energy;
+}
+
+float calculateSwitchProbability(int difference, float kb = 1)
+{
+    if(difference<=0)
+        return 1.0f;
+    else
+        return exp(-difference * kb);
+}
+
+

@@ -23,7 +23,7 @@ struct Node{
 typedef struct Node NODE;
 
 
-
+void flipSpin(Node*);
 void destroyNodes(NODE**,int);
 int getEmptyEdgeIndex(NODE*,int);
 int isEdge(NODE*,NODE*,int);
