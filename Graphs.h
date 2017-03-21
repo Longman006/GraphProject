@@ -21,5 +21,7 @@ typedef struct Graph GRAPH;
 GRAPH* createGraph(GRAPH*,int,int);
 void printGraph(GRAPH*);
 void makeGraph(GRAPH*);
+void destroyGraph(GRAPH*);
+void connectGraph(GRAPH*);
 
 #endif /* GRAPHS_H_ */
