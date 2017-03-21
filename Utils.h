@@ -12,7 +12,7 @@
 #include<stdio.h>
 
 int getRandom(void);
-float getRandom(void);
+float getRandomFloat(void);
 
 
 #endif /* UTILS_H_ */

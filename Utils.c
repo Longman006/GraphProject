@@ -15,7 +15,7 @@ int getRandom(void){
 	return rand();
 }
 
-float getRandom(void)
+float getRandomFloat(void)
 {
     return ((float)getRandom())/RAND_MAX;
 }

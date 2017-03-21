@@ -29,11 +29,11 @@ int isEdge(NODE* node,NODE* compare,int n_edges){
 	return 0;
 }
 
-void flipSpin(Node* node)
+void flipSpin(NODE* node)
 {
     if(node->spin == SPIN_UP)
-        node->spin == SPIN_DOWN;
+        node->spin = SPIN_DOWN;
     else
-        node->spin == SPIN_UP;
+        node->spin = SPIN_UP;
 }
 

@@ -8,7 +8,7 @@
 
  #include "Ising.h"
 
-int calculateEnergyFromNeighbours(Node* node, int n_edges)
+int calculateEnergyFromNeighbours(NODE* node, int n_edges)
 {
     int sum = 0;
     for(int i=0; i<n_edges; i++)
@@ -17,7 +17,7 @@ int calculateEnergyFromNeighbours(Node* node, int n_edges)
     return -sum;
 }
 
-int calculateContributionDifference(Node* node, int n_edges)
+int calculateContributionDifference(NODE* node, int n_edges)
 {
     int energy = 0, flippedEnergy = 0;
 
@@ -29,7 +29,7 @@ int calculateContributionDifference(Node* node, int n_edges)
     return flippedEnergy - energy;
 }
 
-int _calculateContribution(Node* node, int n_edges)
+int _calculateContribution(NODE* node, int n_edges)
 {
     int energy = calculateEnergyFromNeighbours(node, n_edges);
     for(int i=0; i<n_edges; i++)
