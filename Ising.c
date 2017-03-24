@@ -38,12 +38,26 @@ int _calculateContribution(NODE* node, int n_edges)
     return energy;
 }
 
-float calculateSwitchProbability(int difference, float kb = 1)
+float calculateSwitchProbability(int difference, float T, float kb)
 {
     if(difference<=0)
         return 1.0f;
     else
-        return exp(-difference * kb);
+        return exp(-difference * kb * T);
 }
 
+void applySmallMCStep(GRAPH* g, float T, float kb)
+{
+    int randIndex = getRandomRange(0, g->n_nodes);
+    int energyDiff = calculateContributionDifference(&(g->nodes[randIndex]), g->n_edges);
+    float probability = calculateSwitchProbability(energyDiff, T, kb);
+    if(isSuccessful(probability))
+        flipSpin(&(g->nodes[randIndex]));
+}
+
+void applyBigMCStep(GRAPH* g, float T, float kb)
+{
+    for(int i=0; i<g->n_nodes; i++)
+        applySmallMCStep(g, T, kb);
+}
 

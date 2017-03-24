@@ -88,3 +88,11 @@ void connectGraph(GRAPH* graph){
 		index=index%n_nodes;
 	}
 }
+
+void fillRandomSpins(GRAPH* graph)
+{
+    for(int i=0; i<graph->n_nodes; i++)
+        graph->nodes[i].spin = getRandomSpin();
+}
+
+

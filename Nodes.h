@@ -7,12 +7,13 @@
 
 #ifndef NODES_H_
 #define NODES_H_
-#include "Utils.h"
-
 
 #define SPIN_UP 1
 #define SPIN_DOWN -1
 typedef signed char SPIN;
+
+#include "Utils.h"
+
 
 struct Node{
 	int index;

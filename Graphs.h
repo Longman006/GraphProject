@@ -23,5 +23,6 @@ void printGraph(GRAPH*);
 void makeGraph(GRAPH*);
 void destroyGraph(GRAPH*);
 void connectGraph(GRAPH*);
+void fillRandomSpins(GRAPH*);
 
 #endif /* GRAPHS_H_ */
