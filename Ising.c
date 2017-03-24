@@ -43,7 +43,7 @@ float calculateSwitchProbability(int difference, float T, float kb)
     if(difference<=0)
         return 1.0f;
     else
-        return exp(-difference * kb * T);
+        return exp(-difference/(kb * T));
 }
 
 void applySmallMCStep(GRAPH* g, float T, float kb)

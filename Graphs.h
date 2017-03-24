@@ -24,5 +24,6 @@ void makeGraph(GRAPH*);
 void destroyGraph(GRAPH*);
 void connectGraph(GRAPH*);
 void fillRandomSpins(GRAPH*);
+void printGraphStats(GRAPH*);
 
 #endif /* GRAPHS_H_ */

@@ -6,7 +6,7 @@
  */
 
 #include "Graphs.h"
-
+#include "Statistics.h"
 
 GRAPH* createGraph(GRAPH* graph,int n_nodes,int n_edges){
 
@@ -95,4 +95,10 @@ void fillRandomSpins(GRAPH* graph)
         graph->nodes[i].spin = getRandomSpin();
 }
 
+
+void printGraphStats(GRAPH* graph)
+{
+    int spinUp = getSpinUpNum(graph);
+    printf("Spins up: %d, spins down: %d\n", spinUp, graph->n_nodes - spinUp);
+}
 

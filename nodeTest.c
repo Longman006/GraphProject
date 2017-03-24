@@ -13,7 +13,7 @@
 
 #define N_EDGES 2
 #define N_NODES 4
-/*
+
 int main(void){
 
 
@@ -28,4 +28,4 @@ int main(void){
 	return 1;
 
 }
-*/
+
