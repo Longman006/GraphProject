@@ -2,7 +2,7 @@
 #include "parseGraph.h"
 #include "Graphs.h"
 
-#define N_EDGES 100
+#define N_EDGES 10000
 #define N_NODES 5
 
 int main(void)
@@ -10,10 +10,10 @@ int main(void)
     float T = 0.05f;
     float kb = 1.0f;
 
-    //FILE* f = fopen("wynik10000.txt", "r");
-    //FILE* wynik = fopen("Plik_wynikowy", "w");
-    GRAPH* g = createGraph(g, N_EDGES, N_NODES);
-    connectGraph(g);
+    FILE* f = fopen("wynik10000.txt", "r");
+    //FILE* wynik = fopen("symulacja10000.txt", "w");
+    GRAPH* g = getGraph(f);
+    //connectGraph(g);
     fillRandomSpins(g);
     //printGraphAlt(g);
 
