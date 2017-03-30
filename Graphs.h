@@ -14,6 +14,7 @@ struct Graph{
 	int n_nodes;
 	int n_edges;
 	NODE *nodes;
+	float temp;
 };
 typedef struct Graph GRAPH;
 
@@ -25,5 +26,7 @@ void destroyGraph(GRAPH*);
 void connectGraph(GRAPH*);
 void fillRandomSpins(GRAPH*);
 void printGraphStats(GRAPH*);
+
+
 
 #endif /* GRAPHS_H_ */

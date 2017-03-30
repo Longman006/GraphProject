@@ -6,15 +6,25 @@
  */
 #ifndef ISING_H_
 #define ISING_H_
+#define KB 1
 
 #include "Graphs.h"
 #include <math.h>
+#include "Statistics.h"
 
-void applySmallMCStep(GRAPH*, float, float);
-void applyBigMCStep(GRAPH*, float, float);
+//Zwykly Ising od czasu
+void applySmallMCStep(GRAPH*);
+void applyBigMCStep(GRAPH*);
 int calculateEnergyFromNeighbours(NODE*, int);
 int _calculateContribution(NODE*, int);             //private
 int calculateContributionDifference(NODE*, int);
-float calculateSwitchProbability(int, float, float);
+float calculateSwitchProbability(int, float);
+float getMagnetization(GRAPH* g);
 
+//OD temperatury
+void setTemp(float ,GRAPH*);
+void saveTempSpectrum(GRAPH* );
+int getStableSpinCount(GRAPH* );
+void saveTimeSpectrum( GRAPH* );
+int nextStep(GRAPH* );
 #endif // ISING_H_

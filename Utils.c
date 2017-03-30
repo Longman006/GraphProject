@@ -6,6 +6,19 @@
  */
 #include "Utils.h"
 
+
+void plotRawData(char* dane){
+	char komenda[100];
+	FILE* gnuplotPipe = popen("gnuplot -persistent","w");
+	if(!gnuplotPipe){
+		fprintf(stdout,"Could not open pipe : %s\n",dane);
+		return;
+	}
+	sprintf(komenda,"plot '%s' using 1:2\n",dane);
+	fprintf(gnuplotPipe, "%s\n",komenda);
+	fflush(gnuplotPipe);
+	pclose(gnuplotPipe);
+}
 int getRandom(void){
 	static int check = 0;
 	if(!check){
@@ -33,10 +46,3 @@ bool isSuccessful(float probability)
     return getRandomFloat()<probability;
 }
 
-SPIN getRandomSpin(void)
-{
-    if(getRandom()%2 == 1)
-        return SPIN_UP;
-    else
-        return SPIN_DOWN;
-}

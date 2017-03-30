@@ -1,60 +1,50 @@
 #include "Ising.h"
 #include "parseGraph.h"
 #include "Graphs.h"
-
+#include "Utils.h"
+#include "Statistics.h"
+#include "Interface.h"
 #define N_EDGES 10000
 #define N_NODES 5
 
 int main(void)
 {
-    float T = 0.05f;
-    float kb = 1.0f;
 
     FILE* f = fopen("wynik10000.txt", "r");
-    //FILE* wynik = fopen("symulacja10000.txt", "w");
     GRAPH* g = getGraph(f);
-    //connectGraph(g);
     fillRandomSpins(g);
-    //printGraphAlt(g);
 
-    printf("\n");
-    char choice = 'a';
-    for(int i=0;;i++)
-    {
+    float T = 0.0f;
+    int choice = SMALLSTEP;
+    printMenu();
+    while(scanf("%d",&choice) && choice!=EXIT){
 
-        choice = getch();
-        switch(choice)
-        {
-            case 's':                           //small step
-                applySmallMCStep(g, T, kb);
-                break;
-            case 'b':                           //big step
-                applyBigMCStep(g, T, kb);
-                break;
-            case 'v':
-                for(int i=0; i<200; i++)        //very big step
-                    applyBigMCStep(g, T, kb);
-                break;
-            case 'e':                           //exit
-                //fclose(f);
-                return 0;
-        }
-        printGraphStats(g);
-
-        //Writing to file
-        /*
-        applySmallMCStep(g, 0.22f, 1.0f);
-        int spinUp = getSpinUpNum(g);
-        fprintf(wynik, "%d %d\n", i, spinUp);
-        if(spinUp == 0 || spinUp ==10000)
-            break;
-            */
-
-
-
+    	switch(choice){
+    	case SMALLSTEP :
+    		printf("small step jest bezuzyteczy\n");
+    		break;
+    	case BIGSTEP :
+    		applyBigMCStep(g);
+    		printf("Applied big step\nPS big step tez jest bezuzyteczny\n");
+    		break;
+    	case TIME_SPECTRUM :
+    		saveTimeSpectrum(g);
+    		break;
+    	case TEMP_SPECTRUM :
+    		saveTempSpectrum(g);
+    		break;
+    	case SET_TEMP :
+    		puts(getOptionName(choice));
+    		if(scanf("%f",&T)){
+    			setTemp(T,g);
+    		}
+    		break;
+    	case EXIT :
+    		break;
+    	default : return 0;
+    	}
+    	printMenu();
     }
-    //fclose(wynik);
-    //fclose(f);
 
 
     return 0;

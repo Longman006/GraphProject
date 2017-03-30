@@ -30,6 +30,7 @@ GRAPH* createGraph(GRAPH* graph,int n_nodes,int n_edges){
 	return graph;
 
 }
+
 void printGraph(GRAPH* graph){
 
 	for(int i = 0 ; i< graph->n_nodes ; i++){

@@ -36,4 +36,10 @@ void flipSpin(NODE* node)
     else
         node->spin = SPIN_UP;
 }
-
+SPIN getRandomSpin(void)
+{
+    if(getRandom()%2 == 1)
+        return SPIN_UP;
+    else
+        return SPIN_DOWN;
+}
