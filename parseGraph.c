@@ -41,3 +41,44 @@ void printGraphAlt(GRAPH* graph)
         printf("spin %d\n", graph->nodes[i].spin);
     }
 }
+
+GRAPH* getGraphFromPython(int nodes, int edges)
+{
+    char command[50];
+    sprintf(command, "python graf_console.py %d %d", nodes, edges);
+    FILE* pythonPipe = popen(command, "r");
+
+    if(!pythonPipe)
+    {
+        printf("Error opening pipe to python");
+        return 0;
+    }
+
+    int a;
+
+    GRAPH* g = (GRAPH*)malloc(sizeof(GRAPH));
+    int n_edges = edges;
+    int n_nodes = nodes;
+
+    g->n_edges = n_edges;
+    g->n_nodes = n_nodes;
+    g->nodes = (NODE*)malloc(sizeof(NODE)*g->n_nodes);
+    for(int i=0; i<g->n_nodes; i++)
+    {
+        g->nodes[i].index = i;
+        g->nodes[i].edges = (NODE**)malloc(sizeof(NODE*)*g->n_edges);
+    }
+    for(int i=0; i<g->n_nodes; i++)
+    {
+        for(int j=0; j<g->n_edges; j++)
+        {
+            int link;
+            fscanf(pythonPipe, "%d", &link);
+            g->nodes[i].edges[j] = &g->nodes[link];
+        }
+    }
+    pclose(pythonPipe);
+    return g;
+
+}
+
