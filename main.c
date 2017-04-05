@@ -9,10 +9,10 @@
 
 int main(void)
 {
-
-    FILE* f = fopen("wynik10000.txt", "r");
-    GRAPH* g = getGraph(f);
+    //FILE* f = fopen("wynik10000.txt", "r");
+    GRAPH* g = getGraphFromPython(100, 5);
     fillRandomSpins(g);
+    printGraphAlt(g);
 
     float T = 0.0f;
     int choice = SMALLSTEP;
@@ -45,6 +45,8 @@ int main(void)
     	}
     	printMenu();
     }
+
+
 
 
     return 0;

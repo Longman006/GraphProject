@@ -117,7 +117,7 @@ void saveTempSpectrum(GRAPH * g){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
 		return ;
 	}
-	float deltaT = 0.05;
+	float deltaT = 0.005;
 	float TMax = 4.5f;
 	float epsilonT = 0.1;
 	for(float T = 0 ; fabs(TMax - T) > epsilonT ; T+=deltaT){
