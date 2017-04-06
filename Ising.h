@@ -15,9 +15,7 @@
 //Zwykly Ising od czasu
 void applySmallMCStep(GRAPH*);
 void applyBigMCStep(GRAPH*);
-int calculateEnergyFromNeighbours(NODE*, int);
-int _calculateContribution(NODE*, int);             //private
-int calculateContributionDifference(NODE*, int);
+int calculateEnergyDifference(NODE*, int);
 float calculateSwitchProbability(int, float);
 float getMagnetization(GRAPH* g);
 

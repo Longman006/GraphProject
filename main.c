@@ -5,14 +5,14 @@
 #include "Statistics.h"
 #include "Interface.h"
 #define N_EDGES 10000
-#define N_NODES 5
+#define N_NODES 3
 
 int main(void)
 {
     //FILE* f = fopen("wynik10000.txt", "r");
-    GRAPH* g = getGraphFromPython(100, 5);
-    fillRandomSpins(g);
-    printGraphAlt(g);
+    GRAPH* g = getGraphFromPython(N_EDGES, N_NODES);
+    fillSameSpins(g, SPIN_UP);
+    //printGraphAlt(g);
 
     float T = 0.0f;
     int choice = SMALLSTEP;

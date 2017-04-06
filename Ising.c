@@ -8,33 +8,13 @@
 
  #include "Ising.h"
 
-
-int calculateEnergyFromNeighbours(NODE* node, int n_edges)
+int calculateEnergyDifference(NODE* node, int n_edges)
 {
     int sum = 0;
     for(int i=0; i<n_edges; i++)
-        sum +=node->spin * node->edges[i]->spin;
+        sum += node->edges[i]->spin;
 
-    return -sum;
-}
-
-int calculateContributionDifference(NODE* node, int n_edges)
-{
-    int energy = 0, flippedEnergy = 0;
-
-    energy = _calculateContribution(node, n_edges);
-    flipSpin(node);
-    flippedEnergy = _calculateContribution(node, n_edges);
-    flipSpin(node);
-
-    return flippedEnergy - energy;
-}
-
-int _calculateContribution(NODE* node, int n_edges)
-{
-    int energy = calculateEnergyFromNeighbours(node, n_edges);
-    for(int i=0; i<n_edges; i++)
-        energy += calculateEnergyFromNeighbours(node->edges[i], n_edges);
+    int energy = 2*node->spin*sum;
 
     return energy;
 }
@@ -46,14 +26,12 @@ float calculateSwitchProbability(int difference, float T)
     else
         return exp(-difference/(KB * T));
 
-
-
 }
 
 void applySmallMCStep(GRAPH* g)
 {
     int randIndex = getRandomRange(0, g->n_nodes);
-    int energyDiff = calculateContributionDifference(&(g->nodes[randIndex]), g->n_edges);
+    int energyDiff = calculateEnergyDifference(&(g->nodes[randIndex]), g->n_edges);
     float probability = calculateSwitchProbability(energyDiff, g->temp);
     if(isSuccessful(probability))
         flipSpin(&(g->nodes[randIndex]));
@@ -80,7 +58,7 @@ float getMagnetization(GRAPH* g){
 	for(int i = 0 ; i<g->n_nodes ; i++){
 		M += g->nodes[i].spin;
 	}
-	return (float) M/g->n_nodes;
+	return fabs(((float) M)/g->n_nodes);
 }
 int nextStep(GRAPH* g ){
 	float epsilon = 0.00001f;
@@ -100,11 +78,23 @@ void saveTimeSpectrum(GRAPH* g){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
 		return ;
 	}
+	/*
 	int i =0;
 		while(nextStep(g) || i<1){ //takie reczne dowhile xD
 			fprintf(plik,"%d %f\n",i,getMagnetization(g));
 			i++;
-		}
+		}*/
+    int max = g->n_nodes - g->n_nodes/50;
+    int min = g->n_nodes - min;
+    int iterationEnd = g->n_nodes/20;
+    for(int i=0; i<iterationEnd; i++)
+    {
+        nextStep(g);
+        fprintf(plik,"%d %f\n",i,getMagnetization(g));
+        int spinsUp = getSpinUpNum(g);
+        if((spinsUp<min || spinsUp>max)&&i>iterationEnd/10)
+            break;
+    }
 		rewind(plik);
 		plotRawData(nazwa);
 		fclose(plik);
@@ -117,12 +107,14 @@ void saveTempSpectrum(GRAPH * g){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
 		return ;
 	}
-	float deltaT = 0.005;
-	float TMax = 4.5f;
+	float deltaT = 0.5;
+	float TMax = 5.0f;
 	float epsilonT = 0.1;
-	for(float T = 0 ; fabs(TMax - T) > epsilonT ; T+=deltaT){
+	for(float T = 0.0f ; fabs(TMax - T) > epsilonT ; T+=deltaT){
 		setTemp(T,g);
-		while(nextStep(g)){}
+		for(int i=0; i<g->n_nodes; i++){
+            nextStep(g);
+		}
 		fprintf(plik,"%f %f\n",T,getMagnetization(g));
 	}
 	rewind(plik);
@@ -130,7 +122,7 @@ void saveTempSpectrum(GRAPH * g){
 	fclose(plik);
 }
 void setTemp(float T,GRAPH* g){
-	fillRandomSpins(g);
+	fillSameSpins(g, SPIN_UP);
 	g->temp = T;
 	fprintf(stdout,"Temp set to : %f\n",g->temp);
 }

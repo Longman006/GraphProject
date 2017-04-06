@@ -25,6 +25,7 @@ void makeGraph(GRAPH*);
 void destroyGraph(GRAPH*);
 void connectGraph(GRAPH*);
 void fillRandomSpins(GRAPH*);
+void fillSameSpins(GRAPH*, SPIN);
 void printGraphStats(GRAPH*);
 
 

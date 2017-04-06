@@ -5,8 +5,8 @@
  *      Author: longman
  */
 
-#include "Graphs.h"
 #include "Statistics.h"
+#include "Graphs.h"
 
 GRAPH* createGraph(GRAPH* graph,int n_nodes,int n_edges){
 
@@ -96,6 +96,11 @@ void fillRandomSpins(GRAPH* graph)
         graph->nodes[i].spin = getRandomSpin();
 }
 
+void fillSameSpins(GRAPH* graph, SPIN spin)
+{
+    for(int i=0; i<graph->n_nodes; i++)
+        graph->nodes[i].spin = spin;
+}
 
 void printGraphStats(GRAPH* graph)
 {
