@@ -38,7 +38,8 @@ SPIN getSpinSelect(void){
 	if(scanf("%d",&choice)){
 		fprintf(stdout,"Selected : %d \n",choice);
 	}
-	else fprintf(stdout,"ERROR returning %d",choice);
+	else
+		fprintf(stdout,"ERROR returning %d",choice);
 	return choice;
 }
 
