@@ -18,6 +18,7 @@ const char* getOptionName(enum Options o){
 	case TIME_SPECTRUM : return "Time spectrum";
 	case TEMP_SPECTRUM : return "Temperature spectrum";
 	case SET_TEMP : return "Set temperature";
+	case SET_SPINS : return "Set spins ";
 	case EXIT : return "Exit";
 	default : return "No such option";
 	}
@@ -30,5 +31,14 @@ void testOptions(void){
 			getOptionName(SMALLSTEP));
 	printMenu();
 
+}
+SPIN getSpinSelect(void){
+	fprintf(stdout," %d: Spins Up\n %d: Spins down \n %d: Spins random\n",SPIN_UP,SPIN_DOWN,SPIN_RANDOM);
+	SPIN choice=0;
+	if(scanf("%d",&choice)){
+		fprintf(stdout,"Selected : %d \n",choice);
+	}
+	else fprintf(stdout,"ERROR returning %d",choice);
+	return choice;
 }
 

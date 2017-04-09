@@ -10,6 +10,7 @@
 
 #define SPIN_UP 1
 #define SPIN_DOWN -1
+#define SPIN_RANDOM 0
 typedef signed char SPIN;
 
 #include "Utils.h"

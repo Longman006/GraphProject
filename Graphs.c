@@ -5,7 +5,6 @@
  *      Author: longman
  */
 
-#include "Statistics.h"
 #include "Graphs.h"
 
 GRAPH* createGraph(GRAPH* graph,int n_nodes,int n_edges){
@@ -90,16 +89,32 @@ void connectGraph(GRAPH* graph){
 	}
 }
 
+/**
+ * Deprecated instead use fillSameSpins(g,SPIN_RANDOM)
+ *
+ */
 void fillRandomSpins(GRAPH* graph)
 {
     for(int i=0; i<graph->n_nodes; i++)
         graph->nodes[i].spin = getRandomSpin();
 }
-
+/**
+ * Deprecated instead use fillSpins(g,SPIN_UP/DOWN)
+ *
+ */
 void fillSameSpins(GRAPH* graph, SPIN spin)
 {
-    for(int i=0; i<graph->n_nodes; i++)
-        graph->nodes[i].spin = spin;
+	for(int i=0; i<graph->n_nodes; i++)
+		graph->nodes[i].spin = spin;
+}
+
+void fillSpins(GRAPH* g,SPIN s){
+	if(s == SPIN_RANDOM){
+		fillRandomSpins(g);
+	}
+	else{
+		fillSameSpins(g,s);
+	}
 }
 
 void printGraphStats(GRAPH* graph)
@@ -108,3 +123,21 @@ void printGraphStats(GRAPH* graph)
     printf("Spins up: %d, spins down: %d\n", spinUp, graph->n_nodes - spinUp);
 }
 
+int getSpinUpNum(GRAPH* g)
+{
+    int sum = 0;
+    for(int i=0; i<g->n_nodes; i++)
+        if(g->nodes[i].spin == SPIN_UP)
+            sum++;
+
+    return sum;
+}
+int getSpinDownNum(GRAPH* g)
+{
+    return g->n_nodes - getSpinUpNum(g);
+}
+void setTemp(float T,GRAPH* g){
+	fillSameSpins(g, SPIN_UP);
+	g->temp = T;
+	fprintf(stdout,"Temp set to : %f\n",g->temp);
+}

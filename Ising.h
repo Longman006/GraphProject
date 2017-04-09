@@ -10,7 +10,6 @@
 
 #include "Graphs.h"
 #include <math.h>
-#include "Statistics.h"
 
 //Zwykly Ising od czasu
 void applySmallMCStep(GRAPH*);
@@ -20,7 +19,6 @@ float calculateSwitchProbability(int, float);
 float getMagnetization(GRAPH* g);
 
 //OD temperatury
-void setTemp(float ,GRAPH*);
 void saveTempSpectrum(GRAPH* );
 int getStableSpinCount(GRAPH* );
 void saveTimeSpectrum( GRAPH* );

@@ -72,7 +72,7 @@ int nextStep(GRAPH* g ){
 }
 void saveTimeSpectrum(GRAPH* g){
 	char nazwa[100];
-	sprintf(nazwa,"OdCzasuT%fN%d",g->temp,g->n_nodes);
+	sprintf(nazwa,"OdCzasuT%fN%d.txt",g->temp,g->n_nodes);
 	FILE* plik = fopen(nazwa,"w+");
 	if(plik == NULL){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
@@ -121,8 +121,4 @@ void saveTempSpectrum(GRAPH * g){
 	plotRawData(nazwa);
 	fclose(plik);
 }
-void setTemp(float T,GRAPH* g){
-	fillSameSpins(g, SPIN_UP);
-	g->temp = T;
-	fprintf(stdout,"Temp set to : %f\n",g->temp);
-}
+

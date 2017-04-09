@@ -27,7 +27,8 @@ void connectGraph(GRAPH*);
 void fillRandomSpins(GRAPH*);
 void fillSameSpins(GRAPH*, SPIN);
 void printGraphStats(GRAPH*);
-
-
+int getSpinUpNum(GRAPH*);
+int getSpinDownNum(GRAPH*);
+void setTemp(float ,GRAPH*);
 
 #endif /* GRAPHS_H_ */

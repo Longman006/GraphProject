@@ -2,7 +2,6 @@
 #include "parseGraph.h"
 #include "Graphs.h"
 #include "Utils.h"
-#include "Statistics.h"
 #include "Interface.h"
 #define N_EDGES 10000
 #define N_NODES 3
