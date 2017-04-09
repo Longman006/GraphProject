@@ -3,15 +3,17 @@
 #include "Graphs.h"
 #include "Utils.h"
 #include "Interface.h"
-#define N_EDGES 10000
-#define N_NODES 3
+#define N_EDGES 3
+#define N_NODES 10000
 
 int main(void)
 {
-    //FILE* f = fopen("wynik10000.txt", "r");
-    GRAPH* g = getGraphFromPython(N_EDGES, N_NODES);
-    fillSameSpins(g, SPIN_UP);
-    //printGraphAlt(g);
+	int n_edges = N_EDGES;
+	int n_nodes =N_NODES;
+    GRAPH* g = getGraphFromPython(n_nodes, n_edges);
+    SPIN s = SPIN_RANDOM;
+    fillSpins(g, s);
+
 
     float T = 0.0f;
     int choice = SMALLSTEP;
@@ -33,10 +35,22 @@ int main(void)
     		saveTempSpectrum(g);
     		break;
     	case SET_TEMP :
-    		puts(getOptionName(choice));
-    		if(scanf("%f",&T)){
-    			setTemp(T,g);
-    		}
+    		T=getTempSelect();
+    		setTemp(T,g);
+    		break;
+    	case SET_SPINS :
+    		s=getNSelect(choice);
+    		fillSpins(g,s);
+    		break;
+    	case SET_N_EDGES :
+    		n_edges=getNSelect(choice);
+    		break;
+    	case SET_N_NODES :
+    		n_nodes = getNSelect(choice);
+    		break;
+    	case CREATE_GRAPH :
+    		g = getGraphFromPython(n_nodes,n_edges);
+    		fillSpins(g,s);
     		break;
     	case EXIT :
     		break;

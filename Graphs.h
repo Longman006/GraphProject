@@ -24,11 +24,17 @@ void printGraph(GRAPH*);
 void makeGraph(GRAPH*);
 void destroyGraph(GRAPH*);
 void connectGraph(GRAPH*);
-void fillRandomSpins(GRAPH*);
-void fillSameSpins(GRAPH*, SPIN);
+
+void fillRandomSpins(GRAPH*);		//zbedne albo private
+void fillSameSpins(GRAPH*, SPIN);	//zbedne albo private
+void fillSpins(GRAPH*,SPIN);
+
 void printGraphStats(GRAPH*);
-int getSpinUpNum(GRAPH*);
-int getSpinDownNum(GRAPH*);
+int getSpinUpNum(GRAPH*); 			//zbedne
+int getSpinDownNum(GRAPH*); 		//zbedne
+int getSpinNum(GRAPH*,SPIN);
+
 void setTemp(float ,GRAPH*);
+
 
 #endif /* GRAPHS_H_ */

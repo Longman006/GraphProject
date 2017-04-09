@@ -1,20 +1,26 @@
 #include "parseGraph.h"
 #include <stdlib.h>
+GRAPH* allocateGraph(int n_nodes,int n_edges){
+
+	GRAPH* g = (GRAPH*)malloc(sizeof(GRAPH));
+	g->n_edges = n_edges;
+	g->n_nodes = n_nodes;
+	g->nodes = (NODE*)malloc(sizeof(NODE)*g->n_nodes);
+	for(int i=0; i<g->n_nodes; i++){
+		g->nodes[i].index = i;
+		g->nodes[i].edges = (NODE**)malloc(sizeof(NODE*)*g->n_edges);
+	}
+	return g;
+
+}
 GRAPH* getGraph(FILE* file)
 {
-    GRAPH* g = (GRAPH*)malloc(sizeof(GRAPH));
+
     int n_edges;
     int n_nodes;
-
     fscanf(file, "%d%d", &n_nodes, &n_edges);
-    g->n_edges = n_edges;
-    g->n_nodes = n_nodes;
-    g->nodes = (NODE*)malloc(sizeof(NODE)*g->n_nodes);
-    for(int i=0; i<g->n_nodes; i++)
-    {
-        g->nodes[i].index = i;
-        g->nodes[i].edges = (NODE**)malloc(sizeof(NODE*)*g->n_edges);
-    }
+    GRAPH* g = allocateGraph(n_nodes,n_edges);
+
     for(int i=0; i<g->n_nodes; i++)
     {
         int currentNumber;
@@ -54,20 +60,10 @@ GRAPH* getGraphFromPython(int nodes, int edges)
         return 0;
     }
 
-    int a;
-
-    GRAPH* g = (GRAPH*)malloc(sizeof(GRAPH));
     int n_edges = edges;
     int n_nodes = nodes;
+    GRAPH* g = allocateGraph(n_nodes,n_edges);
 
-    g->n_edges = n_edges;
-    g->n_nodes = n_nodes;
-    g->nodes = (NODE*)malloc(sizeof(NODE)*g->n_nodes);
-    for(int i=0; i<g->n_nodes; i++)
-    {
-        g->nodes[i].index = i;
-        g->nodes[i].edges = (NODE**)malloc(sizeof(NODE*)*g->n_edges);
-    }
     for(int i=0; i<g->n_nodes; i++)
     {
         for(int j=0; j<g->n_edges; j++)

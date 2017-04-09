@@ -6,6 +6,6 @@
 GRAPH* getGraph(FILE* file);
 GRAPH* getGraphFromPython(int, int);
 void printGraphAlt(GRAPH* graph);
-
+GRAPH* allocateGraph(int ,int);
 #endif // PARSE_GRAPH_
 

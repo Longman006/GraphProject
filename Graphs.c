@@ -136,8 +136,21 @@ int getSpinDownNum(GRAPH* g)
 {
     return g->n_nodes - getSpinUpNum(g);
 }
+/**
+ * TO samo tutaj , jak juz mamy SPIN_UP i DOWN to juz z niego korzystajmy
+ * bedzie dwa razy mniej funkcji
+ */
+
+int getSpinNum(GRAPH* g,SPIN s){
+	int sum = 0 ;
+	for(int i =0 ; i< g->n_nodes ; i++){
+		if(g->nodes[i].spin == s){
+			sum++;
+		}
+	}
+	return sum;
+}
 void setTemp(float T,GRAPH* g){
-	fillSameSpins(g, SPIN_UP);
 	g->temp = T;
 	fprintf(stdout,"Temp set to : %f\n",g->temp);
 }
