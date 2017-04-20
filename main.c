@@ -8,6 +8,8 @@
 
 int main(void)
 {
+
+	printf("Witam\n");
 	int n_edges = N_EDGES;
 	int n_nodes =N_NODES;
     GRAPH* g = getGraphFromPython(n_nodes, n_edges);
