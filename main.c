@@ -3,6 +3,7 @@
 #include "Graphs.h"
 #include "Utils.h"
 #include "Interface.h"
+
 #define N_EDGES 3
 #define N_NODES 10000
 
@@ -18,26 +19,30 @@ int main(void)
 
 
     float T = 0.0f;
-    int choice = SMALLSTEP;
+    float TMin = 0.0f;
+    float TMax = 0.0f;
+    float TDelta = 1.0f;
+    int choice = EXIT;
     printMenu();
     while(scanf("%d",&choice) && choice!=EXIT){
-
     	switch(choice){
-    	case SMALLSTEP :
-    		printf("small step jest bezuzyteczy\n");
-    		break;
-    	case BIGSTEP :
-    		applyBigMCStep(g);
-    		printf("Applied big step\nPS big step tez jest bezuzyteczny\n");
-    		break;
     	case TIME_SPECTRUM :
     		saveTimeSpectrum(g);
     		break;
     	case TEMP_SPECTRUM :
-    		saveTempSpectrum(g);
+    		fclose(saveTempSpectrum(g,TMin,TMax,TDelta,true));
+    		break;
+    	case SET_TMIN :
+    		TMin = getXSelect(choice);
+    		break;
+    	case SET_TMAX :
+    		TMax = getXSelect(choice);
+    		break;
+    	case SET_DELTAT :
+    		TDelta = getXSelect(choice);
     		break;
     	case SET_TEMP :
-    		T=getTempSelect();
+    		T=getXSelect(choice);
     		setTemp(T,g);
     		break;
     	case SET_SPINS :

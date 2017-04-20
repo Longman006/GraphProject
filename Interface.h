@@ -14,11 +14,12 @@
  * EXIT musi byc ostatni
  */
 enum Options {
-	SMALLSTEP=0,
-	BIGSTEP,
-	TIME_SPECTRUM,
-	TEMP_SPECTRUM,
+	TIME_SPECTRUM=0,
+	SET_TMIN,
+	SET_TMAX,
+	SET_DELTAT,
 	SET_TEMP,
+	TEMP_SPECTRUM,
 	SET_SPINS,
 	SET_N_NODES,
 	SET_N_EDGES,
@@ -26,9 +27,8 @@ enum Options {
 	EXIT};
 
 SPIN getSpinSelect(void);
-int getNSelect(enum Options o);
+int getNSelect(enum Options );
 void printMenu(void);
-void testOptions(void);
 const char* getOptionName(enum Options );
-float getTempSelect(void);
+float getXSelect(enum Options );
 #endif /* INTERFACE_H_ */

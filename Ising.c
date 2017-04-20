@@ -78,14 +78,9 @@ void saveTimeSpectrum(GRAPH* g){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
 		return ;
 	}
-	/*
-	int i =0;
-		while(nextStep(g) || i<1){ //takie reczne dowhile xD
-			fprintf(plik,"%d %f\n",i,getMagnetization(g));
-			i++;
-		}*/
+
     int max = g->n_nodes - g->n_nodes/50;
-    int min = g->n_nodes - min;
+    int min = g->n_nodes/50;
     int iterationEnd = g->n_nodes/20;
     for(int i=0; i<iterationEnd; i++)
     {
@@ -99,18 +94,17 @@ void saveTimeSpectrum(GRAPH* g){
 		plotRawData(nazwa);
 		fclose(plik);
 }
-void saveTempSpectrum(GRAPH * g){
+FILE* saveTempSpectrum(GRAPH * g,float TMin ,float TMax ,float deltaT,bool plot){
+
 	char nazwa[100];
+
 	sprintf(nazwa,"OdTempN%d",g->n_nodes);
 	FILE* plik = fopen(nazwa,"w+");
 	if(plik == NULL){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
-		return ;
+		return NULL;
 	}
-	float deltaT = 0.5;
-	float TMax = 5.0f;
-	float epsilonT = 0.1;
-	for(float T = 0.0f ; fabs(TMax - T) > epsilonT ; T+=deltaT){
+	for(float T = TMin ; T<TMax ; T+=deltaT){
 		setTemp(T,g);
 		for(int i=0; i<g->n_nodes; i++){
             nextStep(g);
@@ -118,7 +112,43 @@ void saveTempSpectrum(GRAPH * g){
 		fprintf(plik,"%f %f\n",T,getMagnetization(g));
 	}
 	rewind(plik);
-	plotRawData(nazwa);
-	fclose(plik);
+
+	if(plot) {
+		plotRawData(nazwa);
+		fclose(plik);
+		return NULL;
+	}
+
+	return plik;
+}
+FILE* saveTcSpectrum(int n_edges){
+
+	int n_nodesMax = 100000;
+	int n_nodesMin = 10;
+	int multiplier=5;
+	GRAPH* g;
+	FILE* plik;
+	float TMargin = 1;
+	float TCritic = 2/log(n_edges/(n_edges-2));
+	float TMin = ((TCritic<TMargin)?0:TCritic-TMargin) ;
+	float TMax=TCritic +TMargin;
+	float deltaT=0.1f;
+
+
+	for(int n_nodes = n_nodesMin ; n_nodes<n_nodesMax ; n_nodes*=multiplier){
+		g = getGraphFromPython(n_nodes,n_edges);
+		plik=saveTempSpectrum(g,TMin,TMax,deltaT,false);
+
+	}
+	return plik;
+
+}
+float findTCritical(FILE* plik){
+	float epsilon = 0.001f;
+	float TCrit;
+	float Temp;
+	float magnetization;
+	while(fscanf(plik,"%f %f",&Temp &magnetization) ){}
+	return TCrit;
 }
 
