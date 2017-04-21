@@ -23,7 +23,7 @@ void saveTimeSpectrum( GRAPH* );
 //OD temperatury
 FILE* saveTempSpectrum(GRAPH* ,float,float,float,bool);
 int getStableSpinCount(GRAPH* );
-FILE* saveTcSpectrum(int );
+FILE* saveTcSpectrum(int ,bool);
 int nextStep(GRAPH* );
 float findTCritical(FILE*);
 #endif // ISING_H_

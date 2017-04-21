@@ -59,6 +59,9 @@ int main(void)
     		g = getGraphFromPython(n_nodes,n_edges);
     		fillSpins(g,s);
     		break;
+    	case TC_N_NODES :
+    		fclose(saveTcSpectrum(n_edges,true));
+    		break;
     	case EXIT :
     		break;
     	default : return 0;
