@@ -132,14 +132,14 @@ void plotCriticalTemp(void){
 		fprintf(stdout,"Cannot open file %s\n",nazwa);
 		return;
 	}
-	for(int K = 1 ; K<100 ; K++){
-		fprintf(plik,"%d %f \n",K,calculateTCritical(K));
+	for(int K = 2 ; K<20 ; K++){
+		fprintf(plik,"%d %f\n",K,calculateTCritical(K));
 	}
 	rewind(plik);
 	plotRawData(nazwa);
 	fclose(plik);
 }
-FILE* saveTcSpectrum(int n_edges,bool plot){
+FILE* saveTcSpectrum(int n_edges,SPIN s,bool plot){
 
 	GRAPH* g;
 	FILE* plikTemp;
@@ -171,10 +171,10 @@ FILE* saveTcSpectrum(int n_edges,bool plot){
 	float deltaTMax = 0.5f;
 	float deltaTMin = 0.07f; //mozna poprawic w razie potrzeby
 
-	int multiplier=10;
+	int multiplier=5;
 	float TFound=0;
 
-	for(int n_nodes = n_nodesMin ; n_nodes<=n_nodesMax ; n_nodes*=multiplier){
+	for(int n_nodes = n_nodesMin ; n_nodes<n_nodesMax ; n_nodes*=multiplier){
 		printf("n_nodes : %d\n",n_nodes);
 		TMargin = expInverseNorm(
 				n_nodes,
@@ -197,6 +197,7 @@ FILE* saveTcSpectrum(int n_edges,bool plot){
 		//printf("TDelta : %f\n",deltaT);
 
 		g = getGraphFromPython(n_nodes,n_edges);
+		fillSpins(g,s);
 		plikTemp=saveTempSpectrum(g,TMin,TMax,deltaT,false);
 		TFound = findTCritical(plikTemp);
 
@@ -231,6 +232,6 @@ float findTCritical(FILE* plik){
 		prevMagnetization=magnetization;
 		prevTemp = Temp;
 	}
-	return prevTemp; ///albo return Temp nie jestem pewien
+	return Temp; ///albo return prevTemp nie jestem pewien
 }
 

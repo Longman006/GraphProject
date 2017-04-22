@@ -20,10 +20,11 @@ float calculateSwitchProbability(int, float);
 float getMagnetization(GRAPH* g);
 void saveTimeSpectrum( GRAPH* );
 float calculateTCritical(int);
+void plotCriticalTemp(void);
 //OD temperatury
 FILE* saveTempSpectrum(GRAPH* ,float,float,float,bool);
 int getStableSpinCount(GRAPH* );
-FILE* saveTcSpectrum(int ,bool);
+FILE* saveTcSpectrum(int ,SPIN,bool);
 int nextStep(GRAPH* );
 float findTCritical(FILE*);
 #endif // ISING_H_

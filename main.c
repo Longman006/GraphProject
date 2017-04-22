@@ -20,8 +20,9 @@ int main(void)
 
     float T = 0.0f;
     float TMin = 0.0f;
-    float TMax = 0.0f;
+    float TMax = 5.0f;
     float TDelta = 1.0f;
+
     int choice = EXIT;
     printMenu();
     while(scanf("%d",&choice) && choice!=EXIT){
@@ -60,7 +61,7 @@ int main(void)
     		fillSpins(g,s);
     		break;
     	case TC_N_NODES :
-    		fclose(saveTcSpectrum(n_edges,true));
+    		fclose(saveTcSpectrum(n_edges,s,true));
     		break;
     	case CRITICAL_TEMP_PLOT :
     		plotCriticalTemp();
