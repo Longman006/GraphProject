@@ -30,7 +30,7 @@ int main(void)
     		saveTimeSpectrum(g);
     		break;
     	case TEMP_SPECTRUM :
-    		fclose(saveTempSpectrum(g,TMin,TMax,TDelta,true));
+    		saveTempSpectrum(g,TMin,TMax,TDelta,true);
     		break;
     	case SET_TMIN :
     		TMin = getXSelect(choice);
@@ -62,15 +62,15 @@ int main(void)
     	case TC_N_NODES :
     		fclose(saveTcSpectrum(n_edges,true));
     		break;
-    	case EXIT :
+    	case CRITICAL_TEMP_PLOT :
+    		plotCriticalTemp();
     		break;
+    	case EXIT :
+    		return 1;
     	default : return 0;
     	}
     	printMenu();
     }
-
-
-
 
     return 0;
 }

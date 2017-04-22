@@ -23,7 +23,8 @@ const char* getOptionName(enum Options o){
 	case SET_N_EDGES : return "Set number of edges";
 	case SET_N_NODES : return "Set number of nodes";
 	case CREATE_GRAPH : return "Create new Graph";
-	case TC_N_NODES : return "Critical Temperature of N ";
+	case TC_N_NODES : return "Critical Temperature(N) ";
+	case CRITICAL_TEMP_PLOT : return "Critical Temperature(K) ";
 	case EXIT : return "Exit";
 	default : return "No such option";
 	}

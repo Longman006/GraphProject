@@ -46,3 +46,20 @@ bool isSuccessful(float probability)
     return getRandomFloat()<probability;
 }
 
+float nonlinearNormalize(float value,float newMax,float newMin,float range,float center,bool inverse){
+	float arg = (value-center)/range;
+	if(!inverse){
+		arg = -arg;
+	}
+	return ((newMax-newMin)*(1.0f/(1.0f+expf(arg)))+newMin);
+}
+float linearNormalize(float value,float newMax,float newMin,float Max , float Min,bool inverse){
+	float newValue = (value-Min)*((newMax-newMin)/(Max-Min))+newMin;
+	if(inverse){
+		newValue = newMax-newValue;
+	}
+	return newValue;
+}
+float expInverseNorm(float value, float newMax , float newMin,float Max,float Min){
+	return (newMax-newMin)*exp(-value/1000)+newMin;
+}

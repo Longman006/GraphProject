@@ -19,7 +19,7 @@ int calculateEnergyDifference(NODE*, int);
 float calculateSwitchProbability(int, float);
 float getMagnetization(GRAPH* g);
 void saveTimeSpectrum( GRAPH* );
-
+float calculateTCritical(int);
 //OD temperatury
 FILE* saveTempSpectrum(GRAPH* ,float,float,float,bool);
 int getStableSpinCount(GRAPH* );
