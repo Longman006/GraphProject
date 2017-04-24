@@ -59,6 +59,7 @@ int main(void)
     	case CREATE_GRAPH :
     		g = getGraphFromPython(n_nodes,n_edges);
     		fillSpins(g,s);
+    		setTemp(T,g);
     		break;
     	case TC_N_NODES :
     		fclose(saveTcSpectrum(n_edges,s,true));
