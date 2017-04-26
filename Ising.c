@@ -156,12 +156,12 @@ FILE* saveTcSpectrum(int n_edges,SPIN s,bool plot){
 	printf("TCritical : %f\n",TCritic);
 
 	int n_nodesMax = 100000;
-	int n_nodesMin = 10;
+	int n_nodesMin = 20;
 	int n_nodesRange = n_nodesMax-n_nodesMin;
 	int n_nodesCenter = n_nodesMin+n_nodesRange/1000;
 
 	float TMargin=0;
-	float TMarginMin=0.3f;
+	float TMarginMin=0.2f;
 	float TMarginMax=6.0f;
 
 	float TMin=0;
@@ -169,9 +169,9 @@ FILE* saveTcSpectrum(int n_edges,SPIN s,bool plot){
 
 	float deltaT=0;
 	float deltaTMax = 0.5f;
-	float deltaTMin = 0.07f; //mozna poprawic w razie potrzeby
+	float deltaTMin = 0.03f; //mozna poprawic w razie potrzeby
 
-	int multiplier=5;
+	int multiplier=4.0;
 	float TFound=0;
 
 	for(int n_nodes = n_nodesMin ; n_nodes<n_nodesMax ; n_nodes*=multiplier){
@@ -215,14 +215,15 @@ FILE* saveTcSpectrum(int n_edges,SPIN s,bool plot){
 
 }
 float findTCritical(FILE* plik){
-	float epsilon = 0.1f;
+	float epsilonT = 0.08f;
+	float epsilon = 0.08f;
 	float Temp;
 	float prevTemp=0;
-	float prevMagnetization =0;
+	float prevMagnetization =10;
 	float magnetization;
 	while(fscanf(plik,"%f %f\n",&Temp ,&magnetization)==2 ){
 		if(fabs(prevMagnetization -magnetization)<epsilon){
-			if(fabs(magnetization)<epsilon){
+			if(fabs(magnetization)<epsilonT){
 				break;
 			}
 		}
@@ -232,6 +233,6 @@ float findTCritical(FILE* plik){
 		prevMagnetization=magnetization;
 		prevTemp = Temp;
 	}
-	return Temp; ///albo return prevTemp nie jestem pewien
+	return prevTemp;///albo return prevTemp nie jestem pewien
 }
 
