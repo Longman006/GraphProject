@@ -5,6 +5,7 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{float}
 \selectlanguage{polish}
 
 
@@ -22,32 +23,70 @@ Celem ćwiczenia było zapoznanie się z symulacją modelu Isinga na regularnych
 
 \section{Wstęp teoretyczny}
 \subsection{Regularny graf przypadkowy}
-Obiekty w układzie zostały połączone w tzw. regularny graf przypadkowy, gdzie obiekty są węzłami grafu, a krawędzie symbolizują połączenia. Zgodnie z definicją takiego grafu, każdy węzeł ma taką samą liczbę krawędzi, które rozmieszczone są losowo.
+Spiny w układzie zostały połączone w tzw. regularny graf przypadkowy, gdzie reprezentowane są przez węzły grafu, a krawędzie symbolizują połączenia między nimi. Zgodnie z definicją takiego grafu, każdy węzeł ma taką samą liczbę krawędzi, które rozmieszczone są losowo.
+
+W dalszej części będziemy oznaczać $N$ jako całkowitą liczbę węzłów(spinów) oraz $K$ jako stopień każdego węzła.
 
 \subsection{Model Isinga}
-Model Isinga opisuje układy, gdzie obiekty mają do wyboru jeden z dwóch różnych stanów. Obiekty te mogą następnie oddziaływać ze sobą, prowadząc do ewolucji czasowej(iteracyjnej) układu. W naszym przypadku stanami były spiny +1 i -1.
+Model Isinga opisuje układy, gdzie spiny mają do wyboru jeden z dwóch różnych stanów. Spiny te mogą następnie oddziaływać ze sobą, prowadząc do ewolucji czasowej(iteracyjnej) układu. W naszym przypadku stanami były liczby +1 i -1.
 
 Energię dla pojedynczego spinu w modelu Isinga określa wzór:
 $$ E_{i}=-s_{i}\sum_{j}s_{j}J_{ij}$$
 Gdzie $s_{i}$- i-ty spin, $J_{ij}$- stała oddziaływania między spinami $i$ oraz $j$(w naszym przypadku równa 1- oddziaływanie ferromagnetyczne), a sumowanie odbywa się po wszystkich sąsiadach $s_{i}$
+
+Z kolei magnetyzację obliczamy na podstawie wzoru:
+$$ M=\frac{\sum_{i=1}^{N}s_{i}}{N} $$
  
 \section{Metoda symulacji oraz temperatura krytyczna}
 W celu symulacji ewolucji czasowej układu posłużyliśmy się algorytmem Metropolis:
 \begin{itemize}
-\item Wybranie losowego spinu $i$
+\item Wybranie losowego spinu $i$ ze zbioru wszystkich spinów w grafie
 \item Kalkulacja różnicy energii w przypadku zmiany spinu
 \item Jeśli energia zmaleje, zmiana spinu na przeciwny. Jeśli nie, zmiana spinu jedynie z pewnym prawdopodobieństwem $e^{\frac{-\Delta E}{k_{B}T}}$
 \end{itemize}
 
-W czasie dążącym do nieskończoności układ z $T=0$ ulegnie samoistnej magnetyzacji. Jednak dla pewnej wartości $T_c$ szumy termiczne będą tak duże, że układ nie będzie wykazywał magnetyzacji, tzn. M=0. Wzór teoretyczny dla temperatury krytycznej:
-$$ T_{c}=\frac{2}{ln(\frac{k}{k-2})} $$
-Gdzie $k$- stopień węzła(liczba sąsiadów)
+Algorytm ten pozwala symulować Model Isinga. Dzięki uwzględnieniu temperatury możemy symulować m.in. przejście fazowe ferromagnetyk- paramagnetyk oraz odwrotnie.
+W czasie dążącym do nieskończoności układ z $T<T_{c}$ ulegnie samoistnej magnetyzacji(stan ferromagnetyczny). Jednak dla pewnej wartości $T_c$ szumy termiczne będą tak duże, że układ nie będzie wykazywał uporządkowanej magnetyzacji, tzn. $M\approx0$(stan paramagnetyczny). Wzór teoretyczny dla temperatury krytycznej(dla regularnych grafów przypadkowych):
+$$ T_{c}=\frac{2}{ln(\frac{K}{K-2})} $$
+Gdzie $K$- stopień węzła(liczba sąsiadów)
 
 \section{Wyniki}
 \subsection{Ewolucja czasowa}
-Tutaj walniemy time spectrum
+\paragraph{}
+Na wykresie \ref{fig:czas_T2} możemy zobaczyć przykładową zależność czasową układu dla $T<T_{c}$ z magnetyzacją początkową bliską 0.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{czas_T2.png}
+\caption{Magnetyzacja układu dla $T=2$, $N=10000$, $K=5$}
+\label{fig:czas_T2}
+\end{figure}
+\paragraph{}
+Z kolei po zmianie temperatury powyżej $T_{c}$ układ przechodzi w stan paramagnetyczny, a jego magnetyzacja spada do 0, gdzie oscyluje potem na skutek szumów termicznych. Widać to na wykresie \ref{fig:czas_T4_5}
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{czas_T4_5.png}
+\caption{Magnetyzacja układu dla $T=4.5$, $N=10000$, $K=5$}
+\label{fig:czas_T4_5}
+\end{figure}
+
 \subsection{Wykresy temperaturowe}
-Tutaj walniemy trochę wykresów temperaturowych
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{rozne_warunki_poczatkowe.png}
+\caption{Porównanie spektrów temperaturowych dla różnych warunków początkowych, $N=10000$, $K=5$}
+\label{fig:rozne_warunki}
+\end{figure}
+
+\paragraph{}
+Na wykresie \ref{fig:rozne_warunki} można zobaczyć porównanie spektrum temperaturowego dla grafu zaczynającego się z różnym $M$. Oba zestawy danych są bardzo zbliżone, co daje podstawy do stwierdzenia, że magnetyzacja układu przy czasie dążącym do nieskończoności nie zależy od warunków początkowych. 
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{rozne_K.png}
+\caption{Porównanie spektrów temperaturowych dla różnych wartości K, $N=10000$}
+\label{fig:rozne_K}
+\end{figure}
+
+\paragraph{}
+Na wykresie \ref{fig:rozne_K} można zobaczyć, jak zmienia się moment przejścia w stan paramagnetyczny w zależności od parametru $K$. Zgodnie ze wzorem teoretycznym większe wartości $K$ skutkują późniejszym przejściem w stan nieuporządkowany.
 
 \paragraph{}
 Na wykresach \ref{fig:TcOd1/N.1} oraz \ref{fig:TcOd1/N.2} wyraźnie widać, że wartość temperatury krytycznej bardzo szybko zbiega do teoretycznej wartości oczekiwanej. Na przykład dla grafu o stopniu węzłów równym 5, teoretyczna temperatura krytyczna wynosi około $T_{c} = 3.9152$ , już dla liczby węzłów mniejszej od $10^3$ (około 650), błąd wynosi mniej niż $2\%$.
@@ -88,11 +127,9 @@ Wykres \ref{fig:TcOdK} podsumowuje poprawne, zgodne z oczekiwaniami, zachowanie 
 \label{fig:LnTcOd1/N.2}
 \end{figure}
 
-\subsection{Inne zależności}
-Tutaj całą resztę
-
 \section{Wnioski}
 \begin{itemize}
-\item Bla bla bla, wszystko wyszło
+\item Na podstawie wykresów można stwierdzić, że wyniki zgadzają się z przewidywaniami teoretycznymi, co może świadczyć o poprawnym wykonaniu symulacji.
+\item Szeregi czasowe układu są zgodne z przewidywaniami. Graf osiąga stan ferromagnetyczny dla $T<_T{c}$ oraz paramagnetyczny dla $T>T_{c}$
 \end{itemize}
 \end{document}
