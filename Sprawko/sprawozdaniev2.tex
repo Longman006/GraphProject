@@ -92,10 +92,11 @@ Na wykresie \ref{fig:rozne_K} można zobaczyć, jak zmienia się moment przejśc
 Na wykresach \ref{fig:TcOd1/N.1} oraz \ref{fig:TcOd1/N.2} wyraźnie widać, że wartość temperatury krytycznej bardzo szybko zbiega do teoretycznej wartości oczekiwanej. Na przykład dla grafu o stopniu węzłów równym 5, teoretyczna temperatura krytyczna wynosi około $T_{c} = 3.9152$ , już dla liczby węzłów mniejszej od $10^3$ (około 650), błąd wynosi mniej niż $2\%$.
 
 \paragraph{}
-Wykresy \ref{fig:LnTcOd1/N.1} oraz \ref{fig:LnTcOd1/N.2} powstały po zlogarytmowaniu poprzednich wykresów. Na wykresach \ref{fig:TcOd1/N.1} oraz \ref{fig:TcOd1/N.2} było widać bardzo szybkie zbieganie temperatury krytycznej, która potencjalnie mogła mieć charakter logarytmiczny. Stąd po zlogarytmowaniu chcieliśmy zobaczyć czy dane rzeczywiście będą układać się w linię prostą.
-
+Wykresy \ref{fig:LnTcOd1/N.1} oraz \ref{fig:LnTcOd1/N.2} powstały po zlogarytmowaniu poprzednich wykresów. Na wykresach \ref{fig:TcOd1/N.1} oraz \ref{fig:TcOd1/N.2} było widać bardzo szybkie zbieganie temperatury krytycznej, która potencjalnie mogła mieć charakter logarytmiczny. Stąd po zlogarytmowaniu chcieliśmy zobaczyć czy dane rzeczywiście będą układać się w linię prostą. Rzeczywiście powyżej pewnej wartośći krytycznej liczby węzłów , czy też, jak na wykresie, poniżej pewnej wartości krytycznej $\frac{1}{N}$, rzędu $10^-3$, temperatury krytyczne układają się w niemal poziomą linię prostą, zbiegającą do teoretycznej temperatury krytycznej.
 \paragraph{}
-Wykres \ref{fig:TcOdK} podsumowuje poprawne, zgodne z oczekiwaniami, zachowanie się zmiany temperatury krytycznej od stopnia węzłów, dla ustalonej liczby węzłów (w tym przypadku dla około $15*10^3$). We wszystkich przypadkach już dla liczby węzłów mniejszych  od stu tysięcy, błąd wynosi dużo mniej niż ułamki procenta. Dla przykładu dla liczby węzłów około $N = 40000$ oraz stopnia węzłów $K=5$ błąd jest rzędu $10^{-6}\%$.
+Wykres \ref{fig:TcOdK} podsumowuje poprawne, zgodne z oczekiwaniami, zachowanie się zmiany temperatury krytycznej od stopnia węzłów, dla ustalonej liczby węzłów (w tym przypadku dla około $15 \cdot 10^3$). 
+\paragraph{}
+We wszystkich przypadkach już dla liczby węzłów mniejszych  od stu tysięcy, błąd wynosi dużo mniej niż ułamki procenta. Dla przykładu dla liczby węzłów około $N = 40000$ oraz stopnia węzłów $K=5$ błąd jest rzędu $10^{-6}\%$. 
 
 \begin{figure}
 \includegraphics[width=\textwidth]{TodK.png}
@@ -104,19 +105,19 @@ Wykres \ref{fig:TcOdK} podsumowuje poprawne, zgodne z oczekiwaniami, zachowanie 
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{K5K6K7.png}
+\includegraphics[width=0.8\textwidth]{K5K6K7.png}
 \caption{Temperatura krytyczna w zależności od $\frac{1}{N}$, dla różnych stopni węzła}
 \label{fig:TcOd1/N.1}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{K8K10.png}
+\includegraphics[width=0.8\textwidth]{K8K10.png}
 \caption{Temperatura krytyczna w zależności od $\frac{1}{N}$, dla różnych stopni węzła}
 \label{fig:TcOd1/N.2}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{LNK5K7K10.png}
+\includegraphics[width=\textwidth]{LNK5K6K7.png}
 \caption{Logarytm naturalny z Temperatura krytyczna w zależności od $\ln(\frac{1}{N})$, dla różnych stopni węzła.}
 \label{fig:LnTcOd1/N.1}
 \end{figure}
