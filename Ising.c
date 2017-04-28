@@ -155,7 +155,7 @@ FILE* saveTcSpectrum(int n_edges,SPIN s,bool plot){
 	float TCritic = calculateTCritical(n_edges);
 	printf("TCritical : %f\n",TCritic);
 
-	int n_nodesMax = 100000;
+	int n_nodesMax = 50000;
 	int n_nodesMin = 20;
 	int n_nodesRange = n_nodesMax-n_nodesMin;
 	int n_nodesCenter = n_nodesMin+n_nodesRange/1000;
